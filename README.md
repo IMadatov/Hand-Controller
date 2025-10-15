@@ -44,7 +44,7 @@ python -m pip install --upgrade pip
 
 ```bash
 # Clone
-git clone https://github.com/<your-username>/Hand-Controller.git
+git clone https://github.com/IMadatov/Hand-Controller.git
 cd Hand-Controller
 
 # (Optional) Select Python 3.10 env on Windows
@@ -70,33 +70,8 @@ tk
 ## ▶️ Run
 
 ```bash
-python src/main.py
+python app.py
 ```
-
-Command-line options (suggested):
-```bash
-python src/main.py --cam 0 --fps 30 --smooth 0.6 --sensitivity 1.0
-```
-
-- `--cam` — camera index (use **Camera Picker** below)
-- `--smooth` — 0..1 EMA smoothing for cursor
-- `--sensitivity` — cursor speed multiplier
-
----
-
-## 🎛️ Camera Picker (Windows)
-
-This project uses **pygrabber** (DirectShow) to enumerate cameras.
-
-```python
-from pygrabber.dshow_graph import FilterGraph
-devices = FilterGraph().get_input_devices()
-for i, name in enumerate(devices):
-    print(i, name)
-```
-
-Select the index you want via `--cam` (e.g. `--cam 1`).
-
 ---
 
 ## 🧠 Gesture Map (Default)
@@ -115,25 +90,6 @@ Select the index you want via `--cam` (e.g. `--cam 1`).
 
 ---
 
-## ⚙️ Configuration
-
-Create a `config.json` (auto-loaded if present):
-
-```json
-{
-  "camera_index": 0,
-  "fps": 30,
-  "cursor": { "sensitivity": 1.0, "smoothing": 0.6 },
-  "gestures": {
-    "pinch_click_threshold": 0.045,
-    "double_click_ms": 300,
-    "scroll_gain": 120
-  }
-}
-```
-
----
-
 ## 🧪 Development Tips
 
 - Use **`cv2.circle`** / **`cv2.line`** to visualize landmarks while tuning
@@ -141,16 +97,6 @@ Create a `config.json` (auto-loaded if present):
 - Add **exponential smoothing** to cursor jitter: `ema = α·x + (1-α)·ema`
 - Clamp screen coords with `pyautogui.size()`
 - Wrap **pyautogui** calls with try/except; respect OS permissions
-
----
-
-## 🐛 Troubleshooting
-
-- **Cursor jumps / jitter** → increase `--smooth`, reduce `--sensitivity`
-- **Clicks firing too often** → raise `pinch_click_threshold`, add hysteresis
-- **High CPU** → set lower `--fps`, shrink `cv2.resize` input, disable debug draw
-- **Wrong camera** → run Camera Picker, pass `--cam` index
-- **tkinter error** → (Windows) install Python with **TCL/Tk** support
 
 ---
 
