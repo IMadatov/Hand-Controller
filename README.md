@@ -1,4 +1,4 @@
-# 🖐️ Hand‑Controller — Gesture‑Powered Mouse & Keyboard (OpenCV + MediaPipe)
+# 🖐️ Hand-Controller — Gesture-Powered Mouse & Keyboard (OpenCV + MediaPipe)
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.x-important.svg)](https://opencv.org/)
@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/badge/OS-Windows%2010%2B-lightgrey.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Control your PC with your hands — no special hardware needed. **Hand‑Controller** uses your webcam, **OpenCV**, **MediaPipe Hands**, and a sprinkle of **pyautogui** magic to move the mouse, click, scroll, and even press keys via intuitive gestures. Built with ❤️ in Python.
+Control your PC with your hands — no special hardware needed. **Hand-Controller** uses your webcam, **OpenCV**, **MediaPipe Hands**, and a sprinkle of **pyautogui** magic to move the mouse, click, scroll, and even press keys via intuitive gestures. Built with ❤️ in Python.
 
 ---
 
@@ -22,34 +22,14 @@ Control your PC with your hands — no special hardware needed. **Hand‑Control
 
 ## 🚀 Features
 
-- 🖱️ Real‑time **cursor movement** with smooth stabilization
+- 🖱️ Real-time **cursor movement** with smooth stabilization
 - 👆 **Left/Double click** via gestures
 - 🖨️ **Scroll** up/down with finger distance
 - ⌨️ **Hotkeys/typing** via virtual key mapping
-- 🎥 Auto‑detect available **cameras** (DirectShow)
+- 🎥 Auto-detect available **cameras** (DirectShow)
 - ⚙️ Tunable sensitivity, smoothing, and gesture thresholds
 - 🪟 Lightweight **Tkinter** overlay (optional)
 - 🧩 Modular design — easy to add new gestures
-
----
-
-## 🧱 Project Structure
-
-```
-Hand-Controller/
-├─ src/
-│  ├─ main.py                # start here
-│  ├─ gestures.py            # gesture definitions & mapping
-│  ├─ controller.py          # mouse/keyboard actions (pyautogui)
-│  ├─ tracking.py            # MediaPipe Hands + landmarks
-│  ├─ camera.py              # webcam discovery & capture (pygrabber)
-│  └─ ui.py                  # (optional) Tkinter overlay
-├─ requirements.txt
-├─ README.md
-└─ assets/
-   └─ demo.gif (or .mp4)
-```
-> _Note_: Your actual paths may differ — keep **`main.py`** as the single entry point for users.
 
 ---
 
@@ -103,7 +83,7 @@ tk
 python src/main.py
 ```
 
-Command‑line options (suggested):
+Command-line options (suggested):
 ```bash
 python src/main.py --cam 0 --fps 30 --smooth 0.6 --sensitivity 1.0
 ```
@@ -137,7 +117,7 @@ Select the index you want via `--cam` (e.g. `--cam 1`).
 |---|---|---|
 | **Move** | Index fingertip moves; wrist anchors | Move mouse |
 | **Left Click** | Thumb touches index (pinch) | `pyautogui.click()` |
-| **Double Click** | Two quick pinches | Double‑click |
+| **Double Click** | Two quick pinches | Double-click |
 | **Scroll** | Vertical distance index ↔ middle | `pyautogui.scroll(±Δ)` |
 | **Key Press** | Custom gestures (e.g., ✌️) | `pyautogui.press('enter')` |
 
@@ -147,7 +127,7 @@ Select the index you want via `--cam` (e.g. `--cam 1`).
 
 ## ⚙️ Configuration
 
-Create a `config.json` (auto‑loaded if present):
+Create a `config.json` (auto-loaded if present):
 
 ```json
 {
@@ -167,7 +147,7 @@ Create a `config.json` (auto‑loaded if present):
 ## 🧪 Development Tips
 
 - Use **`cv2.circle`** / **`cv2.line`** to visualize landmarks while tuning
-- Normalize distances by **hand size** (wrist‑index span) for camera‑independent thresholds
+- Normalize distances by **hand size** (wrist-index span) for camera-independent thresholds
 - Add **exponential smoothing** to cursor jitter: `ema = α·x + (1-α)·ema`
 - Clamp screen coords with `pyautogui.size()`
 - Wrap **pyautogui** calls with try/except; respect OS permissions
@@ -187,9 +167,9 @@ Create a `config.json` (auto‑loaded if present):
 ## 🗺️ Roadmap
 
 - [ ] Configurable gesture editor UI
-- [ ] Multi‑hand gestures (e.g., zoom)
-- [ ] Cross‑platform support (Linux/macOS)
-- [ ] Plugin system for app‑specific actions
+- [ ] Multi-hand gestures (e.g., zoom)
+- [ ] Cross-platform support (Linux/macOS)
+- [ ] Plugin system for app-specific actions
 - [ ] Calibration wizard
 
 ---
@@ -222,4 +202,3 @@ This project is licensed under the **MIT License**. See `LICENSE` for details.
 ## ⭐️ Star This Repo
 
 If this project helps you, please give it a ⭐ — it keeps the momentum going!
-
