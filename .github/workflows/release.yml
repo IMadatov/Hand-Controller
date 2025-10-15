@@ -1,0 +1,76 @@
+name: Build & Release (Windows EXE)
+
+on:
+  push:
+    tags:
+      - "v*"           # ex: v1.0.0
+
+permissions:
+  contents: write      # needed to create a Release
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip wheel
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      # Build from your actual entry file.
+      # If you now have main() inside main.py, this points at main.py.
+      - name: Build EXE (PyInstaller)
+        run: >
+          python -m PyInstaller
+          --name HandController
+          --onefile
+          --noconsole
+          --clean
+          --collect-all cv2
+          --collect-all mediapipe
+          --add-data "Header;Header"
+          app.py
+
+      - name: Package artifact (zip)
+        run: |
+          powershell Compress-Archive -Path dist\HandController.exe -DestinationPath HandController-${{ github.ref_name }}-win.zip
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HandController-${{ github.ref_name }}-win
+          path: HandController-${{ github.ref_name }}-win.zip
+
+  release:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: HandController-${{ github.ref_name }}-win
+          path: .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: HandController-${{ github.ref_name }}-win.zip
+          generate_release_notes: true
