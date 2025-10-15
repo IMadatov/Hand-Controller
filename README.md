@@ -10,16 +10,6 @@ Control your PC with your hands — no special hardware needed. **Hand-Controlle
 
 ---
 
-## ✨ Demo
-
-> Add your demo here (GIF / MP4 / YouTube)
->
-> - `assets/demo.gif` or `assets/demo.mp4`
->
-> _Tip:_ Record with OBS → convert to GIF via `ffmpeg -i demo.mp4 demo.gif`
-
----
-
 ## 🚀 Features
 
 - 🖱️ Real-time **cursor movement** with smooth stabilization
